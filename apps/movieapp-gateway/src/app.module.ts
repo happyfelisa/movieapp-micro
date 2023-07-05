@@ -3,13 +3,16 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloGatewayDriver, ApolloGatewayDriverConfig } from '@nestjs/apollo';
-import { IntrospectAndCompose } from '@apollo/gateway';
+import { IntrospectAndCompose, RemoteGraphQLDataSource } from '@apollo/gateway';
+import { authContext } from './auth.context';
 
 @Module({
   imports: [
     GraphQLModule.forRoot<ApolloGatewayDriverConfig>({
       driver: ApolloGatewayDriver,
-      server: {},
+      server: {
+        context: authContext,
+      },
       gateway: {
         supergraphSdl: new IntrospectAndCompose({
           subgraphs: [
@@ -19,6 +22,17 @@ import { IntrospectAndCompose } from '@apollo/gateway';
             { name: 'actors', url: 'http://localhost:3004/graphql' },
           ],
         }),
+        buildService({ url }) {
+          return new RemoteGraphQLDataSource({
+            url,
+            willSendRequest({ request, context }) {
+              request.http.headers.set(
+                'user',
+                context.user ? JSON.stringify(context.user) : null,
+              );
+            },
+          });
+        },
       },
     }),
   ],

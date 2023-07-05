@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/movieapp-gateway/src",
+  "compilerOptions": {
+    "deleteOutDir": true,
+    "webpack": true,
+    "tsConfigPath": "apps/movieapp-gateway/tsconfig.app.json"
+  },
+  "monorepo": true,
+  "root": "apps/movieapp-gateway",
+  "projects": {
+    "movieapp-gateway": {
+      "type": "application",
+      "root": "apps/movieapp-gateway",
+      "entryFile": "main",
+      "sourceRoot": "apps/movieapp-gateway/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/movieapp-gateway/tsconfig.app.json"
+      }
+    },
+    "userms": {
+      "type": "application",
+      "root": "apps/userms",
+      "entryFile": "main",
+      "sourceRoot": "apps/userms/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/userms/tsconfig.app.json"
+      }
+    },
+    "playlistms": {
+      "type": "application",
+      "root": "apps/playlistms",
+      "entryFile": "main",
+      "sourceRoot": "apps/playlistms/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/playlistms/tsconfig.app.json"
+      }
+    },
+    "moviems": {
+      "type": "application",
+      "root": "apps/moviems",
+      "entryFile": "main",
+      "sourceRoot": "apps/moviems/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/moviems/tsconfig.app.json"
+      }
+    },
+    "actorms": {
+      "type": "application",
+      "root": "apps/actorms",
+      "entryFile": "main",
+      "sourceRoot": "apps/actorms/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/actorms/tsconfig.app.json"
+      }
+    },
+    "playlist": {
+      "type": "application",
+      "root": "apps/playlist",
+      "entryFile": "main",
+      "sourceRoot": "apps/playlist/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/playlist/tsconfig.app.json"
+      }
+    },
+    "playlists": {
+      "type": "application",
+      "root": "apps/playlists",
+      "entryFile": "main",
+      "sourceRoot": "apps/playlists/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/playlists/tsconfig.app.json"
+      }
+    },
+    "movies": {
+      "type": "application",
+      "root": "apps/movies",
+      "entryFile": "main",
+      "sourceRoot": "apps/movies/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/movies/tsconfig.app.json"
+      }
+    },
+    "actors": {
+      "type": "application",
+      "root": "apps/actors",
+      "entryFile": "main",
+      "sourceRoot": "apps/actors/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/actors/tsconfig.app.json"
+      }
+    }
+  }
+}

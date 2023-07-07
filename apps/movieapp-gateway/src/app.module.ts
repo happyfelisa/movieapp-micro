@@ -11,18 +11,18 @@ import { authContext } from './auth.context';
     GraphQLModule.forRoot<ApolloGatewayDriverConfig>({
       driver: ApolloGatewayDriver,
       server: {
-        context: authContext,
+        //context: authContext,
       },
       gateway: {
         supergraphSdl: new IntrospectAndCompose({
           subgraphs: [
-            { name: 'userms', url: 'http://localhost:3001/graphql' },
-            { name: 'playlists', url: 'http://localhost:3002/graphql' },
-            { name: 'movies', url: 'http://localhost:3003/graphql' },
-            { name: 'actors', url: 'http://localhost:3004/graphql' },
+            { name: 'userms', url: 'http://localhost:3101/graphql' },
+            { name: 'playlists', url: 'http://localhost:3102/graphql' },
+            { name: 'movies', url: 'http://localhost:3103/graphql' },
+            { name: 'actors', url: 'http://localhost:3104/graphql' },
           ],
         }),
-        buildService({ url }) {
+        /*buildService({ url }) {
           return new RemoteGraphQLDataSource({
             url,
             willSendRequest({ request, context }) {
@@ -32,7 +32,7 @@ import { authContext } from './auth.context';
               );
             },
           });
-        },
+        },*/
       },
     }),
   ],

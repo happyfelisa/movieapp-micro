@@ -7,6 +7,7 @@ import {
   Parent,
   ResolveField,
   ResolveReference,
+  Float,
 } from '@nestjs/graphql';
 import { PlaylistsService } from './playlists.service';
 
@@ -47,7 +48,7 @@ export class PlaylistsResolver {
   }
 
   @Mutation(() => PlaylistType)
-  removePlaylist(@Args('id', { type: () => Int }) id: number) {
+  removePlaylist(@Args('id', { type: () => Float }) id: number) {
     return this.playlistsService.remove(id);
   }
 

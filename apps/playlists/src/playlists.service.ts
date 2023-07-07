@@ -61,6 +61,7 @@ export class PlaylistsService {
         id: In(movies),
       },
     });
+
     playlist.movies = moviesToPlaylist;
     console.log(playlist);
     return await this.playlists.save({
@@ -71,14 +72,14 @@ export class PlaylistsService {
     });
   }
 
-  async remove(id: number): Promise<void> {
+  async remove(id: number) {
     const playlist = await this.playlists.findOne({
       where: {
         id: id,
       },
     });
     if (!playlist) throw new NotFoundException();
-    await this.playlists.remove(playlist);
+    return await this.playlists.remove(playlist);
   }
 
   async findAll(): Promise<Playlist[]> {

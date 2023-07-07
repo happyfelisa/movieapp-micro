@@ -2,9 +2,10 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 //import { CreatePlaylistInput } from './dto/create-playlist.input';
 import { Playlist } from './entities/playlist.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { CreatePlaylistInput } from './dto/create-playlist.input';
 import { Movie } from './entities/movie,.entity';
+import { UpdatePlaylistInput } from './dto/update-playlist.input';
 
 @Injectable()
 export class PlaylistsService {
@@ -41,7 +42,8 @@ export class PlaylistsService {
     return createPlaylistInput;
   }
 
-  /*async editPlaylist(id: number, body: any) {
+  async update(id: number, updatePlaylistInput: UpdatePlaylistInput) {
+    const { name, movies } = updatePlaylistInput;
     const playlist = await this.playlists.findOne({
       where: {
         id: id,
@@ -51,20 +53,23 @@ export class PlaylistsService {
       },
     });
     if (!playlist) throw new NotFoundException();
-    playlist.name = body.name;
+    //console.log(playlist);
+    playlist.name = name;
     playlist.movies = [];
-    console.log(playlist);
-    const movies = await this.movieRepository.find({
+    const moviesToPlaylist = await this.moviesRepo.find({
       where: {
-        id: In(body.movies),
+        id: In(movies),
       },
     });
-    console.log(body);
-    playlist.movies = movies;
+    playlist.movies = moviesToPlaylist;
     console.log(playlist);
-    return await this.playlistRepository.save(playlist);
+    return await this.playlists.save({
+      id: playlist.id,
+      name: playlist.name,
+      userId: playlist.userId,
+      movies: moviesToPlaylist,
+    });
   }
-  */
 
   async remove(id: number): Promise<void> {
     const playlist = await this.playlists.findOne({

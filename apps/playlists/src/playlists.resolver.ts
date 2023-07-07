@@ -13,6 +13,7 @@ import { PlaylistsService } from './playlists.service';
 import { CreatePlaylistInput } from './dto/create-playlist.input';
 import { PlaylistType } from './entities/PlaylistType';
 import { UserType } from './entities/UserType';
+import { UpdatePlaylistInput } from './dto/update-playlist.input';
 
 @Resolver(() => PlaylistType)
 export class PlaylistsResolver {
@@ -35,7 +36,7 @@ export class PlaylistsResolver {
     return this.playlistsService.findOne(id);
   }
 
-  /*@Mutation(() => PlaylistType)
+  @Mutation(() => PlaylistType)
   updatePlaylist(
     @Args('updatePlaylistInput') updatePlaylistInput: UpdatePlaylistInput,
   ) {
@@ -43,7 +44,7 @@ export class PlaylistsResolver {
       updatePlaylistInput.id,
       updatePlaylistInput,
     );
-  }*/
+  }
 
   @Mutation(() => PlaylistType)
   removePlaylist(@Args('id', { type: () => Int }) id: number) {

@@ -1,10 +1,10 @@
 import { InputType, Field } from '@nestjs/graphql';
 
 @InputType()
-export class CreatePlaylistInput {
+export class LoginInput {
   @Field()
-  name: string;
+  username: string;
 
   @Field()
-  userId: number;
+  password: string;
 }

@@ -10,6 +10,7 @@ import { UsermsService } from './userms.service';
 import { UserType } from './entities/UserType';
 import { CreateUserInput } from './dto/create-user.input';
 import { User } from './entities/userm.entity';
+import { LoginInput } from './dto/login.input';
 
 @Resolver(() => User)
 export class UsermsResolver {
@@ -28,6 +29,11 @@ export class UsermsResolver {
   @Query(() => UserType, { name: 'userm' })
   findOne(@Args('id', { type: () => Int }) id: number) {
     return this.usermsService.findOne(id);
+  }
+
+  @Query(() => UserType, { name: 'login' })
+  login(@Args('loginInput') loginInput: LoginInput) {
+    return this.usermsService.login(loginInput);
   }
 
   @ResolveReference()

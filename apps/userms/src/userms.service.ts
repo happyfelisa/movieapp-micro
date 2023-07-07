@@ -3,6 +3,7 @@ import { CreateUserInput } from './dto/create-user.input';
 import { User } from './entities/userm.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { LoginInput } from './dto/login.input';
 
 @Injectable()
 export class UsermsService {
@@ -25,14 +26,15 @@ export class UsermsService {
     return this.users.findOne({ where: { id } });
   }
 
-  async login(username: string, pass: string) {
+  async login(loginInput: LoginInput) {
+    const { username, password } = loginInput;
     const user = await this.users.findOne({ where: { username } });
     console.log(username);
-    console.log(pass);
+    console.log(password);
     console.log(user);
-    if (user?.password !== pass) {
+    if (user?.password !== password) {
       throw new UnauthorizedException();
     }
-    return username;
+    return user;
   }
 }

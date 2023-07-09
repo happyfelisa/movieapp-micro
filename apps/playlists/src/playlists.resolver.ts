@@ -15,6 +15,7 @@ import { CreatePlaylistInput } from './dto/create-playlist.input';
 import { PlaylistType } from './entities/PlaylistType';
 import { UserType } from './entities/UserType';
 import { UpdatePlaylistInput } from './dto/update-playlist.input';
+import { RemovePlaylistInput } from './dto/remove-playlist.input';
 
 @Resolver(() => PlaylistType)
 export class PlaylistsResolver {
@@ -48,8 +49,10 @@ export class PlaylistsResolver {
   }
 
   @Mutation(() => PlaylistType)
-  removePlaylist(@Args('id', { type: () => Float }) id: number) {
-    return this.playlistsService.remove(id);
+  removePlaylist(
+    @Args('removePlaylistInput') removePlaylistInput: RemovePlaylistInput,
+  ) {
+    return this.playlistsService.remove(removePlaylistInput);
   }
 
   @ResolveField(() => UserType)

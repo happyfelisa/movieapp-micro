@@ -6,6 +6,7 @@ import { In, Repository } from 'typeorm';
 import { CreatePlaylistInput } from './dto/create-playlist.input';
 import { Movie } from './entities/movie,.entity';
 import { UpdatePlaylistInput } from './dto/update-playlist.input';
+import { RemovePlaylistInput } from './dto/remove-playlist.input';
 
 @Injectable()
 export class PlaylistsService {
@@ -72,10 +73,11 @@ export class PlaylistsService {
     });
   }
 
-  async remove(id: number) {
+  async remove(removePlaylistInput: RemovePlaylistInput) {
+    const { id } = removePlaylistInput;
     const playlist = await this.playlists.findOne({
       where: {
-        id: id,
+        id: +id,
       },
     });
     if (!playlist) throw new NotFoundException();
